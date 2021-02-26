@@ -39,7 +39,7 @@ You can build with luarocks or cmake.
 -- ffmpeg -f s16le -ar 48000 -ac 2 -i file.pcm file.wav
 -- ffplay -f s16le -ar 48000 -ac 2 file.pcm
 --
--- requires luaopus for parsing an Ogg stream
+-- requires luaogg for parsing an Ogg stream
 
 local ogg = require'luaogg'
 local opus = require'luaopus'
