@@ -19,6 +19,12 @@ int luaopen_luaopus(lua_State *L);
 LUAOPUS_PUBLIC
 int luaopen_luaopus_encoder(lua_State *L);
 
+LUAOPUS_PUBLIC
+int luaopen_luaopus_decoder(lua_State *L);
+
+LUAOPUS_PUBLIC
+int luaopen_luaopus_defines(lua_State *L);
+
 #ifdef __cplusplus
 }
 #endif
