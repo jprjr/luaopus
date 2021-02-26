@@ -9,6 +9,14 @@ the packetization and multistream APIs.
 
 # Installation
 
+Available on [luarocks](https://luarocks.org/modules/jprjr/luaopus)
+
+```bash
+luarocks install luaopus
+```
+
+Available on [AUR](https://aur.archlinux.org/pkgbase/lua-luaopus/)
+
 ## Building from source
 
 You can build with luarocks or cmake.
