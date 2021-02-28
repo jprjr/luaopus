@@ -281,6 +281,8 @@ luaopus_decoder_get_nb_samples(lua_State *L) {
     return 1;
 }
 
+/* this didn't appear until opus 1.1, may fail if compiling against
+ * a really old version of libopus */
 static int
 luaopus_pcm_soft_clip(lua_State *L) {
     float *pcm = NULL;
@@ -344,9 +346,16 @@ LUAOPUS_CTL_RESET_STATE(decoder)
 LUAOPUS_DECODER_GET_UINTEGER(FINAL_RANGE)
 LUAOPUS_DECODER_GET_INTEGER(BANDWIDTH)
 LUAOPUS_DECODER_GET_INTEGER(SAMPLE_RATE)
+/* phase inversion and dtx don't appear until opus >= 1.2 */
+#ifdef OPUS_SET_PHASE_INVERSION_DISABLED
 LUAOPUS_DECODER_SET_BOOLEAN(PHASE_INVERSION_DISABLED)
+#endif
+#ifdef OPUS_GET_PHASE_INVERSION_DISABLED
 LUAOPUS_DECODER_GET_BOOLEAN(PHASE_INVERSION_DISABLED)
+#endif
+#ifdef OPUS_GET_IN_DTX
 LUAOPUS_DECODER_GET_BOOLEAN(IN_DTX)
+#endif
 
 LUAOPUS_DECODER_SET_INTEGER(GAIN)
 LUAOPUS_DECODER_GET_INTEGER(GAIN)
@@ -369,9 +378,15 @@ static const struct luaL_Reg luaopus_decoder_functions[] = {
     { ctl_get("final_range"), CTL_GET(FINAL_RANGE) },
     { ctl_get("bandwdth"), CTL_GET(BANDWIDTH) },
     { ctl_get("samplerate"), CTL_GET(SAMPLE_RATE) },
+#ifdef OPUS_SET_PHASE_INVERSION_DISABLED
     { ctl_set("phase_inversion_disabled"), CTL_SET(PHASE_INVERSION_DISABLED) },
+#endif
+#ifdef OPUS_GET_PHASE_INVERSION_DISABLED
     { ctl_get("phase_inversion_disabled"), CTL_GET(PHASE_INVERSION_DISABLED) },
+#endif
+#ifdef OPUS_GET_IN_DTX
     { ctl_get("in_dtx"), CTL_GET(IN_DTX) },
+#endif
     { ctl_get("gain"), CTL_GET(GAIN) },
     { ctl_set("gain"), CTL_SET(GAIN) },
     { ctl_get("last_packet_duration"), CTL_GET(LAST_PACKET_DURATION) },

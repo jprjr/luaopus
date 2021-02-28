@@ -17,6 +17,7 @@ LUAOPUS_PUBLIC
 int luaopen_luaopus_defines(lua_State *L) {
     lua_newtable(L);
 
+/* defined in opus >= 1.0 */
     luaopus_push_const(OPUS_OK);
     luaopus_push_const(OPUS_BAD_ARG);
     luaopus_push_const(OPUS_BUFFER_TOO_SMALL);
@@ -37,16 +38,38 @@ int luaopen_luaopus_defines(lua_State *L) {
     luaopus_push_const(OPUS_BANDWIDTH_WIDEBAND);
     luaopus_push_const(OPUS_BANDWIDTH_SUPERWIDEBAND);
     luaopus_push_const(OPUS_BANDWIDTH_FULLBAND);
+/* defined in opus >= 1.1 */
+#ifdef OPUS_FRAMESIZE_ARG
     luaopus_push_const(OPUS_FRAMESIZE_ARG);
+#endif
+#ifdef OPUS_FRAMESIZE_2_5_MS
     luaopus_push_const(OPUS_FRAMESIZE_2_5_MS);
+#endif
+#ifdef OPUS_FRAMESIZE_5_MS
     luaopus_push_const(OPUS_FRAMESIZE_5_MS);
+#endif
+#ifdef OPUS_FRAMESIZE_10_MS
     luaopus_push_const(OPUS_FRAMESIZE_10_MS);
+#endif
+#ifdef OPUS_FRAMESIZE_20_MS
     luaopus_push_const(OPUS_FRAMESIZE_20_MS);
+#endif
+#ifdef OPUS_FRAMESIZE_40_MS
     luaopus_push_const(OPUS_FRAMESIZE_40_MS);
+#endif
+#ifdef OPUS_FRAMESIZE_60_MS
     luaopus_push_const(OPUS_FRAMESIZE_60_MS);
+#endif
+/* defined in opus >= 1.2 */
+#ifdef OPUS_FRAMESIZE_80_MS
     luaopus_push_const(OPUS_FRAMESIZE_80_MS);
+#endif
+#ifdef OPUS_FRAMESIZE_100_MS
     luaopus_push_const(OPUS_FRAMESIZE_100_MS);
+#endif
+#ifdef OPUS_FRAMESIZE_120_MS
     luaopus_push_const(OPUS_FRAMESIZE_120_MS);
+#endif
 
     lua_pushcclosure(L,luaopus_get_version_string,0);
     lua_setfield(L,-2,"opus_get_version_string");

@@ -196,9 +196,17 @@ LUAOPUS_CTL_RESET_STATE(encoder)
 LUAOPUS_ENCODER_GET_UINTEGER(FINAL_RANGE)
 LUAOPUS_ENCODER_GET_INTEGER(BANDWIDTH)
 LUAOPUS_ENCODER_GET_INTEGER(SAMPLE_RATE)
+
+/* phase inversion and dtx don't appear until opus >= 1.2 */
+#ifdef OPUS_SET_PHASE_INVERSION_DISABLED
 LUAOPUS_ENCODER_SET_BOOLEAN(PHASE_INVERSION_DISABLED)
+#endif
+#ifdef OPUS_GET_PHASE_INVERSION_DISABLED
 LUAOPUS_ENCODER_GET_BOOLEAN(PHASE_INVERSION_DISABLED)
+#endif
+#ifdef OPUS_GET_IN_DTX
 LUAOPUS_ENCODER_GET_BOOLEAN(IN_DTX)
+#endif
 
 LUAOPUS_ENCODER_SET_INTEGER(COMPLEXITY)
 LUAOPUS_ENCODER_GET_INTEGER(COMPLEXITY)
@@ -238,11 +246,19 @@ LUAOPUS_ENCODER_GET_BOOLEAN(DTX)
 LUAOPUS_ENCODER_SET_INTEGER(LSB_DEPTH)
 LUAOPUS_ENCODER_GET_INTEGER(LSB_DEPTH)
 
+#ifdef OPUS_SET_EXPERT_FRAME_DURATION
 LUAOPUS_ENCODER_SET_INTEGER(EXPERT_FRAME_DURATION)
+#endif
+#ifdef OPUS_GET_EXPERT_FRAME_DURATION
 LUAOPUS_ENCODER_GET_INTEGER(EXPERT_FRAME_DURATION)
+#endif
 
+#ifdef OPUS_SET_PREDICTION_DISABLED
 LUAOPUS_ENCODER_SET_BOOLEAN(PREDICTION_DISABLED)
+#endif
+#ifdef OPUS_GET_PREDICTION_DISABLED
 LUAOPUS_ENCODER_GET_BOOLEAN(PREDICTION_DISABLED)
+#endif
 
 static const struct luaL_Reg luaopus_encoder_functions[] = {
     { "OpusEncoder", luaopus_OpusEncoder },
@@ -253,9 +269,15 @@ static const struct luaL_Reg luaopus_encoder_functions[] = {
     { ctl_get("final_range"), CTL_GET(FINAL_RANGE) },
     { ctl_get("bandwdth"), CTL_GET(BANDWIDTH) },
     { ctl_get("samplerate"), CTL_GET(SAMPLE_RATE) },
+#ifdef OPUS_SET_PHASE_INVERSION_DISABLED
     { ctl_set("phase_inversion_disabled"), CTL_SET(PHASE_INVERSION_DISABLED) },
+#endif
+#ifdef OPUS_GET_PHASE_INVERSION_DISABLED
     { ctl_get("phase_inversion_disabled"), CTL_GET(PHASE_INVERSION_DISABLED) },
+#endif
+#ifdef OPUS_GET_IN_DTX
     { ctl_get("in_dtx"), CTL_GET(IN_DTX) },
+#endif
     { ctl_set("complexity"), CTL_SET(COMPLEXITY) },
     { ctl_get("complexity"), CTL_GET(COMPLEXITY) },
     { ctl_set("bitrate"), CTL_SET(BITRATE) },
@@ -281,10 +303,18 @@ static const struct luaL_Reg luaopus_encoder_functions[] = {
     { ctl_get("dtx"), CTL_GET(DTX) },
     { ctl_set("lsb_depth"), CTL_SET(LSB_DEPTH) },
     { ctl_get("lsb_depth"), CTL_GET(LSB_DEPTH) },
+#ifdef OPUS_SET_EXPERT_FRAME_DURATION
     { ctl_set("expert_frame_duration"), CTL_SET(EXPERT_FRAME_DURATION) },
+#endif
+#ifdef OPUS_GET_EXPERT_FRAME_DURATION
     { ctl_get("expert_frame_duration"), CTL_GET(EXPERT_FRAME_DURATION) },
+#endif
+#ifdef OPUS_SET_PREDICTION_DISABLED
     { ctl_set("prediction_disabled"), CTL_SET(PREDICTION_DISABLED) },
+#endif
+#ifdef OPUS_GET_PREDICTION_DISABLED
     { ctl_get("prediction_disabled"), CTL_GET(PREDICTION_DISABLED) },
+#endif
     { NULL, NULL },
 };
 
